@@ -1,0 +1,312 @@
+id: '@kenshi9999/ImmersiveMenus'
+metadata:
+  displayName:
+    en: Immersive Menus
+  portrait: null
+  banner: null
+  screenshots: []
+  tags:
+    - toolbar
+  appTargetVersion: null
+  bundled: false
+settings: []
+styles:
+  '@seelen/fancy-toolbar': |
+    .bg-layer-1 {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      backdrop-filter: blur(28px) saturate(240%) brightness(1.2) contrast(1.25) hue-rotate(2deg);
+      -webkit-backdrop-filter: blur(28px) saturate(240%) brightness(1.2) contrast(1.25) hue-rotate(2deg);
+      background:
+        radial-gradient(ellipse 120% 80% at 30% 20%, rgba(255,255,255,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 100% at 70% 80%, rgba(120,180,255,0.05) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(120,180,255,0.015) 50%, rgba(255,255,255,0.08) 100%);
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.1),
+        0 2px 12px rgba(255,255,255,0.16),
+        0 1px 6px rgba(120,180,255,0.1) inset,
+        0 -1px 4px rgba(255,255,255,0.22) inset,
+        0 0 40px 12px rgba(255,255,255,0.09) inset,
+        0 0 0 1px rgba(255,255,255,0.25),
+        0 0 0 2px rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.4;
+      transition: all 0.3s ease-in-out;
+      mix-blend-mode: lighten;
+    }
+
+    .tray-items,
+    [class*="tray"], .bluetooth, .keyboard-selector, .notification, .calendar-container, .wlan-selector, .media-control {
+      animation: slide-in-from-left 0.5s ease-out !important;
+    }
+
+    @keyframes slide-in-from-left {
+      0% {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .tray-item,
+    [class*="tray-item"] {
+      transition: all 0.3s ease !important;
+      animation: fade-bounce-in 0.6s ease-out !important;
+    }
+
+    @keyframes fade-bounce-in {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(30px);
+      }
+      50% {
+        opacity: 0.7;
+        transform: scale(1.1) translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .tray-item:hover,
+    [class*="tray-item"]:hover, .bluetooth-entry:hover, .keyboard-selector-entry:hover, .notification:hover,
+    .calendar-date:hover, .calendar-navigator:hover, .calendar-cell-value:hover, .wlan-selector-entries:hover, 
+    .media-device:hover, .media-device-action:hover {
+      /* Removed scale/size increase on hover */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-radius: 12px !important;
+      transition: all 0.2s ease !important;
+      /* No transform: scale or translateY */
+    }
+
+    .tray-item:active,
+    [class*="tray-item"]:active, .bluetooth-entry:active, .keyboard-selector-entry:active, .notification:active,
+    .calendar-date:active, .calendar-navigator:active, .calendar-cell-value:active, .wlan-selector:active,
+    .media-device:active, .media-device-action:active {
+      transform: scale(0.95) !important;
+      transition: all 0.1s ease !important;
+    }
+
+    .tray-item {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      position: relative;
+      color: inherit;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      animation: item-entrance 0.8s ease-out !important;
+    }
+
+    .notification {
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      cursor: pointer;
+      position: relative;
+      color: inherit;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      animation: item-entrance 0.8s ease-out !important;
+    }
+
+    .calendar-date, .calendar-navigator, .calendar-cell-value {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      position: relative;
+      color: inherit;
+      overflow: hidden;
+      animation: item-entrance 0.8s ease-out !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .bluetooth-entry {
+      display: flex;
+      align-items: left;
+      justify-content: left;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      position: relative;
+      color: inherit;
+      overflow: hidden;
+      animation: item-entrance 0.8s ease-out !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .keyboard-selector-entry {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      position: relative;
+      color: inherit;
+      overflow: hidden;
+      animation: item-entrance 0.8s ease-out !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .wlan-selector-entries {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      border-radius: 8px;
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      position: relative;
+      color: inherit;
+      overflow: hidden;
+      animation: item-entrance 0.8s ease-out !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .media-device {
+      align-items: left;
+      min-height: 38px;
+      min-width: 28px;
+      justify-content: left;
+      border-radius: 8px;
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      color: inherit;
+      overflow: hidden;
+      position: relative;
+      animation: item-entrance 0.8s ease-out !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    @keyframes item-entrance {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+        filter: blur(4px);
+      }
+      60% {
+        opacity: 0.8;
+        transform: translateY(-5px) scale(1.05);
+        filter: blur(0px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+      }
+    }
+
+    /* Dramatic hover, but no scale/size increase */
+    .tray-item:hover, .bluetooth-entry:hover, .keyboard-selector-entry:hover, .notification:hover, 
+    .calendar-date:hover, .calendar-navigator:hover, .calendar-cell-value:hover, .wlan-selector-entries:hover,
+    .media-device:hover, .media-device-action:hover {
+      background: rgba(0, 0, 0, 0.3);
+      box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        0 2px 6px rgba(255, 255, 255, 0.1);
+      /* Removed transform: scale/translateY/rotate */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .tray-item:active, .bluetooth-entry:active, .keyboard-selector-entry:active, .notification:active,
+    .calendar-date:active, .calendar-navigator:active, .calendar-cell-value:active, .wlan-selector-entries:active,
+    .media-device:active, .media-device-action:active {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      transform: translateY(1px) scale(0.95);
+      transition: all 0.1s ease;
+    }
+
+    .tray-item::after, .bluetooth-entry::after, .keyboard-selector-entry::after, .notification::after,
+    .calendar-date::after, .calendar-navigator::after, .calendar-cell-value::after, .wlan-selector-entries::after,
+    .media-device::after, .media-device-action::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        110deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 80%
+      );
+      transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+    }
+
+    .tray-item:hover::after, .bluetooth-entry:hover::after, .keyboard-selector-entry:hover::after, .notification:hover::after, 
+    .calendar-date:hover::after, .calendar-navigator:hover::after, .calendar-cell-value:hover::after, 
+    .wlan-selector-entries:hover::after, .media-device:hover::after, .media-device-action:hover::after {
+      left: 100%;
+      opacity: 1;
+    }
+
+    .tray-item.active, .bluetooth-entry.active, .keyboard-selector-entry.active, .notification.active,
+    .calendar-date.active, .calendar-navigator.active, .calendar-cell-value.active, .wlan-selector-entries.active,
+    .media-device.active, .media-device-action.active {
+      animation: tray-pulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes tray-pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+      }
+    }
+
+    * [class*="tray"], .bluetooth, .keyboard-selector, .media-control {
+      animation: global-slide-in 0.6s ease !important;
+    }
+
+    @keyframes global-slide-in {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .tray-item,
+    .tray-items > *,
+    [data-testid*="tray"], .bluetooth-entry, .keyboard-selector-entry, .notification,
+    .calendar-date, .calendar-navigator, .calendar-cell-value, .wlan-selector-entries, .media-device, 
+    .media-device-action {
+      animation: simple-fade 1s ease-in-out !important;
+    }
+
+    @keyframes simple-fade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+sharedStyles: ''
